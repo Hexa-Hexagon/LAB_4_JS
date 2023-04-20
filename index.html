@@ -5,31 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script defer>
+        function Complete() {
+            let element = `Прізвище: ${document.sel.family.value}\n Ім'я: ${document.sel.name.value}\n Рік: ${document.sel.age.value}\n Телефон: ${document.sel.phone.value}`;
+            alert(element);
+        }
+
+        function checkAge(age) {
+            if (Number(age) < 18) {
+                return document.sel.age.innerHTML = 18;
+            }
+            return age;
+        }
+    </script>
 </head>
 
 <body>
-    <h1>Динамічне заповнення списку</h1>
+    <h1>Заповніть анкету</h1>
     <form name="sel">
-        <select name="listOfLinks"></select>
+        <table>
+            <tr>
+                <td><b>Прізвище:</b></td>
+                <td><input name="family" size="20" onblur="this.value = this.value.toUpperCase()"></td>
+            </tr>
+            <tr>
+                <td><b>Ім'я:</b></td>
+                <td><input name="name" size="20" onblur="this.value=this.value.toUpperCase()"></td>
+            </tr>
+            <tr>
+                <td><b>Вік:</b></td>
+                <td><input name="age" size="3" value="18" onblur="this.value=checkAge(this.value)" onfocus="this.select()"></td>
+            </tr>
+            <tr>
+                <td><b>Телефон:</b></td>
+                <td><input name="phone" type="tel" size="10"></td>
+            </tr>
+        </table>
+        <input type="button" value="Ok" onclick="Complete();" />
+        <input type="reset" value="Cancel">
     </form>
-    <input type="button" value="Перехід" onclick="window.location.href = document.links[sel.listOfLinks.selectedIndex];" />
-    <form>
-        <a href="https://rozetka.com.ua"></a>
-        <a href="https://allo.ua"></a>
-        <a href="https://www.olx.ua"></a>
-        <a href="https://www.zieit.edu.ua"></a>
-    </form>
-    <script>
-        for (let i = 0; i < document.links.length; i++) {
-            document.sel.listOfLinks.options[i] = new Option(
-                document.links[i],
-                i,
-                false,
-                false
-            );
-        }
-        document.sel.listOfLinks.selectedIndex = 0;
-    </script>
+
 </body>
 
 </html>
