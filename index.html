@@ -7,22 +7,30 @@
     <title>Document</title>
     <script>
         function btnClick() {
-            if (document.form.sex[0].checked) {
-                document.form.sex[1].click();
-            } else {
-                document.form.sex[0].click();
+            let si = document.form.item.selectedIndex;
+            console.log(si);
+            let text = "";
+            text = `Запропоновано ${document.form.item.options.length} напоїв \nВибраний ${document.form.item.options[si].text}, (value = ${document.form.item.options[si].value}, index = ${document.form.item.options[si].index})`;
+            if (document.form.item.options[si].defaultSelected) {
+                text += "\nЦей напій вибирається за замовчуванням."
+                alert(text);
             }
         }
     </script>
 </head>
 
 <body>
-    <h1>Метод click групи перемикачів</h1>
+    <h1>Робота з готовим списком</h1>
     <form name="form">
-        <input type="radio" name="sex" value="Male" checked/> Чоловічий
-        <input type="radio" name="sex" value="Female" /> Жіночий
-        <br>Стан перемикачів можна змінити цією кнопкою
-        <input type="button" value="Зміна стану" onclick="btnClick()" />
+        <select name="item" size="5">
+        <option value="tea" selected > Чай
+        <option value="cofee" selected > Кава
+        <option value="milk" selected > Молоко
+        <option value="cocoa" selected > Какао
+        <option value="juice" selected > Сік
+       </select>
+        <input type="button" value="Нехай кава" onclick="document.form.item.options[1].selected=true" />
+        <input type="button" value="Подивимось" onclick="btnClick()" />
     </form>
 </body>
 
