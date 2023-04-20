@@ -5,33 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function btnClick() {
-            let si = document.form.item.selectedIndex;
-            console.log(si);
-            let text = "";
-            text = `Запропоновано ${document.form.item.options.length} напоїв \nВибраний ${document.form.item.options[si].text}, (value = ${document.form.item.options[si].value}, index = ${document.form.item.options[si].index})`;
-            if (document.form.item.options[si].defaultSelected) {
-                text += "\nЦей напій вибирається за замовчуванням."
-                alert(text);
-            }
-        }
-    </script>
 </head>
 
 <body>
-    <h1>Робота з готовим списком</h1>
-    <form name="form">
-        <select name="item" size="5">
-        <option value="tea" selected > Чай
-        <option value="cofee" selected > Кава
-        <option value="milk" selected > Молоко
-        <option value="cocoa" selected > Какао
-        <option value="juice" selected > Сік
-       </select>
-        <input type="button" value="Нехай кава" onclick="document.form.item.options[1].selected=true" />
-        <input type="button" value="Подивимось" onclick="btnClick()" />
+    <h1>Динамічне заповнення списку</h1>
+    <form name="sel">
+        <select name="listOfLinks"></select>
     </form>
+    <input type="button" value="Перехід" onclick="window.location.href = document.links[sel.listOfLinks.selectedIndex];" />
+    <form>
+        <a href="https://rozetka.com.ua"></a>
+        <a href="https://allo.ua"></a>
+        <a href="https://www.olx.ua"></a>
+        <a href="https://www.zieit.edu.ua"></a>
+    </form>
+    <script>
+        for (let i = 0; i < document.links.length; i++) {
+            document.sel.listOfLinks.options[i] = new Option(
+                document.links[i],
+                i,
+                false,
+                false
+            );
+        }
+        document.sel.listOfLinks.selectedIndex = 0;
+    </script>
 </body>
 
 </html>
